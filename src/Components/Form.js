@@ -11,7 +11,7 @@ class Form extends Component {
   }
 
   validate = () => {
-    const fieldErrors = this.props.fieldErrors
+    const { fieldErrors } = this.props
     const errMessages = Object.keys(fieldErrors).filter(k => fieldErrors[k])
 
     if (!errMessages.length) return true
@@ -19,7 +19,7 @@ class Form extends Component {
     return false
   }
 
-  fileSelectedHandler = (event) => {
+  handleFileSelected = (event) => {
     if (event.target.files[0]) {
       this.props.handleImage(event.target.files[0])
     }
@@ -102,7 +102,7 @@ class Form extends Component {
           <input
             style={{ display: 'none' }}
             type="file"
-            onChange={this.fileSelectedHandler}
+            onChange={this.handleFileSelected}
             ref={fileInput => this.fileInput = fileInput}
             className="inputfile" />
           <button

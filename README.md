@@ -42,3 +42,5 @@ this will serve the app on localhost:3000
 * Use an image cropping package such as React-image-crop to allow resizing and cropping of images
 * Get exact details of styling requirements from the designer
 * Get a paid plan to test for IE10 compatibility
+* Write Tests
+* Run HTML validation
