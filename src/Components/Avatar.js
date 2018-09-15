@@ -1,5 +1,6 @@
-import React from 'react'
-import './Avatar.css'
+import React from 'react';
+import './Avatar.css';
+import PropTypes from 'prop-types';
 
 const Avatar = (props) => {
   if (props.image) {
@@ -13,14 +14,18 @@ const Avatar = (props) => {
             resizeMode='contain' />
         </div>
       </div>
-    )
+    );
   }
 
   return (
     <div className="container">
       <i className="fas fa-user fa-8x"></i>
     </div>
-  )
-}
+  );
+};
 
-export default Avatar
+Avatar.propTypes = {
+  image: PropTypes.string,
+};
+
+export default Avatar;

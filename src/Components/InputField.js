@@ -1,15 +1,16 @@
-import React, { Component } from 'react'
-import { Input } from 'semantic-ui-react'
-import './InputField.css'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import { Input } from 'semantic-ui-react';
+import './InputField.css';
+import PropTypes from 'prop-types';
 
 class InputField extends Component {
   static propTypes = {
-    placeholder: PropTypes.string,
-    name: PropTypes.string.isRequired,
-    value: PropTypes.string,
+    labelname: PropTypes.string,
+    className: PropTypes.string,
+    onChange: PropTypes.func,
     validate: PropTypes.func,
-    onChange: PropTypes.func.isRequired
+    value: PropTypes.string,
+    name: PropTypes.string
   }
 
   state = {
@@ -18,17 +19,17 @@ class InputField extends Component {
   }
 
   static getDerivedStateFromProps(nextProps) {
-    return { value: nextProps.value }
+    return { value: nextProps.value };
   }
 
   onChange = (event) => {
-    const name = this.props.name
-    const value = event.target.value
-    const error = this.props.validate ? this.props.validate(value) : false
+    const name = this.props.name;
+    const value = event.target.value;
+    const error = this.props.validate ? this.props.validate(value) : false;
 
-    this.setState({ value, error })
+    this.setState({ value, error });
 
-    this.props.onChange({ name, value, error })
+    this.props.onChange({ name, value, error });
   }
   
   render() {
@@ -44,8 +45,8 @@ class InputField extends Component {
         />
         <p style={{ color: 'red', marginLeft: '16px', marginTop: '5px' }}>{this.state.error}</p>
       </div>
-    )
+    );
   }
 }
 
-export default InputField
+export default InputField;

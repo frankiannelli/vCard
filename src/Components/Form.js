@@ -1,27 +1,36 @@
 import React, { Component } from 'react';
-import './Form.css'
-import InputField from './InputField'
-import validator from 'validator'
-
+import './Form.css';
+import InputField from './InputField';
+import validator from 'validator';
+import PropTypes from 'prop-types';
 
 class Form extends Component {
 
+  static propTypes = {
+    value: PropTypes.string,
+    contact: PropTypes.object,
+    image: PropTypes.string,
+    onChange: PropTypes.func,
+    fieldErrors: PropTypes.object,
+    handleImage: PropTypes.func,
+  }
+
   onInputChange = ({ name, value, error }) => {
-    this.props.onChange({ name, value, error })
+    this.props.onChange({ name, value, error });
   }
 
   validate = () => {
-    const { fieldErrors } = this.props
-    const errMessages = Object.keys(fieldErrors).filter(k => fieldErrors[k])
+    const { fieldErrors } = this.props;
+    const errMessages = Object.keys(fieldErrors).filter(k => fieldErrors[k]);
 
-    if (!errMessages.length) return true
+    if (!errMessages.length) return true;
 
-    return false
+    return false;
   }
 
   handleFileSelected = (event) => {
     if (event.target.files[0]) {
-      this.props.handleImage(event.target.files[0])
+      this.props.handleImage(event.target.files[0]);
     }
   }
 
@@ -108,13 +117,13 @@ class Form extends Component {
           <button
             onClick={() => this.fileInput.click()}
             className="upload">
-            {this.props.image ? "Change avatar" : "Upload Avatar"}
+            {this.props.image ? 'Change avatar' : 'Upload Avatar'}
           </button>
           <button >Create hCard</button>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Form 
+export default Form; 

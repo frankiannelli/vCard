@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
-import './Container.css'
-import Form from './Form'
-import Preview from './Preview'
+import React, { Component } from 'react';
+import './Container.css';
+import Form from './Form';
+import Preview from './Preview';
+import PropTypes from 'prop-types';
 
 class Container extends Component {
   state = {
@@ -21,19 +22,25 @@ class Container extends Component {
     selectedFile: null
   }
 
+  static propTypes = {
+    name: PropTypes.string,
+    value: PropTypes.string,
+    onInputChange: PropTypes.func
+  }
+
   onInputChange = ({ name, value, error }) => {
-    const contact = Object.assign({}, this.state.contact)
-    const fieldErrors = Object.assign({}, this.state.fieldErrors)
+    const contact = Object.assign({}, this.state.contact);
+    const fieldErrors = Object.assign({}, this.state.fieldErrors);
 
-    contact[name] = value
-    fieldErrors[name] = error
+    contact[name] = value;
+    fieldErrors[name] = error;
 
-    this.setState({ contact, fieldErrors })
+    this.setState({ contact, fieldErrors });
   }
 
   handleImage = (file) => {
-    let selectedFile = URL.createObjectURL(file)
-    this.setState({ selectedFile })
+    let selectedFile = URL.createObjectURL(file);
+    this.setState({ selectedFile });
   }
 
   render() {
@@ -56,8 +63,8 @@ class Container extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Container
+export default Container;

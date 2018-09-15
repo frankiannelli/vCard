@@ -1,6 +1,7 @@
-import React from 'react'
-import Avatar from './Avatar'
-import './Preview.css'
+import React from 'react';
+import Avatar from './Avatar';
+import './Preview.css';
+import PropTypes from 'prop-types';
 
 const Preview = (props) => (
   <div className="previewBox">
@@ -30,7 +31,7 @@ const Preview = (props) => (
         <hr />
         <div className="previewDetail">
           <div className="previewLabel" style={{ opacity: '0' }}>text</div>
-          <div className="previewData"><span className="locality">{`${props.contact.suburb}${props.contact.suburb ? "," : ""} `}</span><span className="region">{props.contact.state}</span></div>
+          <div className="previewData"><span className="locality">{`${props.contact.suburb}${props.contact.suburb ? ',' : ''} `}</span><span className="region">{props.contact.state}</span></div>
         </div>
         <hr />
         <div className="previewFoot">
@@ -47,6 +48,11 @@ const Preview = (props) => (
       </div>
     </div>
   </div>
-)
+);
 
-export default Preview
+Preview.propTypes = {
+  contact: PropTypes.object,
+  image: PropTypes.string
+};
+
+export default Preview;
