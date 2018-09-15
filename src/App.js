@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import Container from './Components/Container';
+import HCardContainer from './Components/HCardContainer';
 
 class App extends Component {
   render() {
     return (
-      <Container />
+      <HCardContainer />
     );
   }
 }

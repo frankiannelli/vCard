@@ -11,7 +11,9 @@ const Preview = (props) => (
         <div className="previewName">
           <h1 className="fn">{`${props.contact.givenName} ${props.contact.surname}`}</h1>
         </div>
-        <Avatar image={props.image} />
+        <Avatar 
+          image={props.image} 
+          imageSize={{ width: 120, height: 150 }}/>
       </div>
       <div className="previewBody">
         <div className="previewDetail">

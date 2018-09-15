@@ -10,7 +10,7 @@ const Avatar = (props) => {
           <img
             alt="user"
             src={props.image}
-            style={{ width: 120, height: 150 }}
+            style={props.imageSize}
             resizeMode='contain' />
         </div>
       </div>
@@ -26,6 +26,7 @@ const Avatar = (props) => {
 
 Avatar.propTypes = {
   image: PropTypes.string,
+  imageSize: PropTypes.object
 };
 
 export default Avatar;
