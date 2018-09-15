@@ -11,7 +11,7 @@ const Avatar = (props) => {
             alt="user"
             src={props.image}
             style={props.imageSize}
-            resizeMode='contain' />
+            resizemode='contain' />
         </div>
       </div>
     );
