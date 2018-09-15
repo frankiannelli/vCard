@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './HCardContainer.css';
-import Form from './Form';
-import Preview from './Preview';
+import Form from './Form/Form';
+import Preview from './Preview/Preview';
 import PropTypes from 'prop-types';
 
 class HCardContainer extends Component {

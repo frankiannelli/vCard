@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Form.css';
-import InputField from './InputField';
+import InputField from './InputField/InputField';
 import validator from 'validator';
 import PropTypes from 'prop-types';
 
