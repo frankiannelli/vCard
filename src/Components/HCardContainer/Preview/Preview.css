@@ -121,7 +121,7 @@
   }
 }
 
-.container {
+.avatarContainer {
   position: relative;
   top: 10px;
   margin-right: 20px;
@@ -133,14 +133,14 @@
   position: relative;
 }
 
-.container img {
+.avatarContainer img {
   position: absolute;
   top:50%;
   left:50%;
   transform: translate(-50%,-50%)
 }
 
-.container i {
+.avatarContainer i {
   margin-top: 20px;
   margin-left: 4px;
 }

@@ -1,51 +1,24 @@
 import React, { Component } from 'react';
-import Avatar from './Avatar/Avatar';
 import './Preview.css';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
-
-const imageMaxSize = 1000000000; //bytes
-const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg';
-const acceptedFileTypesArray = acceptedFileTypes.split(',').map((item) => { return item.trim(); });
+import verifyFile from '../../Helpers/verifyFile';
+import { imageMaxSize, acceptedFileTypes } from '../../Constants/constants';
 
 class Preview extends Component {
 
-  // state = {
-  //   imgSrc: null
-  // }
-
-  verifyFile = (files) => {
-    if (files && files.length > 0) {
-      const currentFile = files[0];
-      const currentFileType = currentFile.type;
-      const currentFileSize = currentFile.size;
-      if (currentFileSize > imageMaxSize) {
-        alert(`This File is too big. Max size is ${imageMaxSize} bytes`);
-        return false;
-      }
-      if (!acceptedFileTypesArray.includes(currentFileType)) {
-        alert('Incorrect file type. Only images allowed');
-        return false;
-      }
-      return true;
-    }
-  }
-
   handleOnDrop = (files, rejectedFiles) => {
     if (rejectedFiles && rejectedFiles.length > 0) {
-      // console.log(rejectedFiles);
-      this.verifyFile(rejectedFiles);
+      verifyFile(rejectedFiles);
     }
 
     if (files && files.length > 0) {
-      const isVerified = this.verifyFile(files);
+      const isVerified = verifyFile(files);
       if (isVerified) {
         const currentFile = files[0];
         const reader = new FileReader();
         reader.addEventListener('load', () => {
-          // console.log(reader.result);
-          // this.setState({ imgSrc: reader.result });
-          this.props.updateImage( reader.result );
+          this.props.updateImage(reader.result);
         }, false);
         reader.readAsDataURL(currentFile);
       }
@@ -61,22 +34,17 @@ class Preview extends Component {
             <div className="previewName">
               <h1 className="fn">{`${this.props.contact.givenName} ${this.props.contact.surname}`}</h1>
             </div>
-            {/* <Avatar
-              image={this.props.image}
-              imageSize={{ width: 120, height: 150 }} /> */}
             {this.props.imgSrc !== null ?
-              <div className="container">
+              <div className="avatarContainer">
                 <div className="imageContainer">
                   <img
                     alt="user"
-                    // src={this.state.imgSrc}
                     src={this.props.imgSrc}
-                    // style={{ width: 120, height: 150 }}
                     resizemode='contain' />
                 </div>
               </div> :
               <Dropzone
-                className="container"
+                className="avatarContainer"
                 onDrop={this.handleOnDrop}
                 accept={acceptedFileTypes}
                 multiple={false}
@@ -123,7 +91,6 @@ class Preview extends Component {
 
 Preview.propTypes = {
   contact: PropTypes.object,
-  // image: PropTypes.string,
   updateImage: PropTypes.func,
   imgSrc: PropTypes.string
 };

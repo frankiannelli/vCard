@@ -4,21 +4,17 @@ import InputField from './InputField/InputField';
 import validator from 'validator';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
-
-const imageMaxSize = 1000000000; //bytes
-const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg';
-const acceptedFileTypesArray = acceptedFileTypes.split(',').map((item) => { return item.trim(); });
-
+import verifyFile from '../../Helpers/verifyFile';
+import { imageMaxSize, acceptedFileTypes } from '../../Constants/constants';
 
 class Form extends Component {
 
   static propTypes = {
-    value: PropTypes.string,
     contact: PropTypes.object,
-    image: PropTypes.string,
+    imgSrc: PropTypes.string,
     onChange: PropTypes.func,
     fieldErrors: PropTypes.object,
-    handleImage: PropTypes.func,
+    updateImage: PropTypes.func
   }
 
   onInputChange = ({ name, value, error }) => {
@@ -32,43 +28,17 @@ class Form extends Component {
     return !errMessages.length;
   }
 
-  handleFileSelected = (event) => {
-    if (event.target.files[0]) {
-      this.props.handleImage(event.target.files[0]);
-    }
-  }
-
-  verifyFile = (files) => {
-    if (files && files.length > 0) {
-      const currentFile = files[0];
-      const currentFileType = currentFile.type;
-      const currentFileSize = currentFile.size;
-      if (currentFileSize > imageMaxSize) {
-        alert(`This File is too big. Max size is ${imageMaxSize} bytes`);
-        return false;
-      }
-      if (!acceptedFileTypesArray.includes(currentFileType)) {
-        alert('Incorrect file type. Only images allowed');
-        return false;
-      }
-      return true;
-    }
-  }
-
   handleOnDrop = (files, rejectedFiles) => {
     if (rejectedFiles && rejectedFiles.length > 0) {
-      // console.log(rejectedFiles);
-      this.verifyFile(rejectedFiles);
+      verifyFile(rejectedFiles);
     }
 
     if (files && files.length > 0) {
-      const isVerified = this.verifyFile(files);
+      const isVerified = verifyFile(files);
       if (isVerified) {
         const currentFile = files[0];
         const reader = new FileReader();
         reader.addEventListener('load', () => {
-          // console.log(reader.result);
-          // this.setState({ imgSrc: reader.result });
           this.props.updateImage(reader.result);
         }, false);
         reader.readAsDataURL(currentFile);
@@ -151,17 +121,10 @@ class Form extends Component {
             labelname="COUNTRY" />
         </div>
         <div className="buttons">
-          <input
-            style={{ display: 'none' }}
-            type="file"
-            onChange={this.handleFileSelected}
-            ref={fileInput => this.fileInput = fileInput}
-            className="inputfile" />
           <button
-            // onClick={() => this.fileInput.click()}
-            onClick={() => { dropzoneRef.open() }}
+            onClick={() => { dropzoneRef.open(); }}
             className="upload">
-            {this.props.image ? 'Change avatar' : 'Upload Avatar'}
+            {this.props.imgSrc ? 'Change avatar' : 'Upload Avatar'}
           </button>
           <Dropzone
             ref={(node) => { dropzoneRef = node; }}
@@ -178,15 +141,3 @@ class Form extends Component {
 }
 
 export default Form;
-
-
-// let dropzoneRef;
-
-// <div>
-//   <Dropzone ref={(node) => { dropzoneRef = node; }} onDrop={(accepted, rejected) => { alert(accepted) }}>
-//     <p>Drop files here.</p>
-//   </Dropzone>
-//   <button type="button" onClick={() => { dropzoneRef.open() }}>
-//     Open File Dialog
-//   </button>
-// </div>
