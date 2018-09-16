@@ -19,7 +19,7 @@ class HCardContainer extends Component {
       country: '',
     },
     fieldErrors: {},
-    selectedFile: null
+    uploadedFile: null
   }
 
   static propTypes = {
@@ -38,9 +38,15 @@ class HCardContainer extends Component {
     this.setState({ contact, fieldErrors });
   }
 
-  handleImage = (file) => {
-    let selectedFile = URL.createObjectURL(file);
-    this.setState({ selectedFile });
+  // handleImage = (file) => {
+  //   let uploadedFile = URL.createObjectURL(file);
+  //   this.setState({ uploadedFile });
+  // }
+
+  handleUpdateImage = (image) => {
+    this.setState({uploadedFile: image}, () => {
+      console.dir(this.state)
+    })
   }
 
   render() {
@@ -50,16 +56,19 @@ class HCardContainer extends Component {
           <div className="formContainer">
             <Form
               contact={this.state.contact}
-              image={this.state.selectedFile}
+              image={this.state.uploadedFile}
               onChange={this.onInputChange}
               fieldErrors={this.state.fieldErrors}
               handleImage={this.handleImage}
+              updateImage={this.handleUpdateImage}
             />
           </div>
           <div className="previewContainer">
             <Preview
               contact={this.state.contact}
-              image={this.state.selectedFile} />
+              // image={this.state.uploadedFile}
+              imgSrc={this.state.uploadedFile}
+              updateImage={this.handleUpdateImage} />
           </div>
         </div>
       </div>

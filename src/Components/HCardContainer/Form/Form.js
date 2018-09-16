@@ -3,6 +3,12 @@ import './Form.css';
 import InputField from './InputField/InputField';
 import validator from 'validator';
 import PropTypes from 'prop-types';
+import Dropzone from 'react-dropzone';
+
+const imageMaxSize = 1000000000; //bytes
+const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg';
+const acceptedFileTypesArray = acceptedFileTypes.split(',').map((item) => { return item.trim(); });
+
 
 class Form extends Component {
 
@@ -32,13 +38,52 @@ class Form extends Component {
     }
   }
 
+  verifyFile = (files) => {
+    if (files && files.length > 0) {
+      const currentFile = files[0];
+      const currentFileType = currentFile.type;
+      const currentFileSize = currentFile.size;
+      if (currentFileSize > imageMaxSize) {
+        alert(`This File is too big. Max size is ${imageMaxSize} bytes`);
+        return false;
+      }
+      if (!acceptedFileTypesArray.includes(currentFileType)) {
+        alert('Incorrect file type. Only images allowed');
+        return false;
+      }
+      return true;
+    }
+  }
+
+  handleOnDrop = (files, rejectedFiles) => {
+    if (rejectedFiles && rejectedFiles.length > 0) {
+      // console.log(rejectedFiles);
+      this.verifyFile(rejectedFiles);
+    }
+
+    if (files && files.length > 0) {
+      const isVerified = this.verifyFile(files);
+      if (isVerified) {
+        const currentFile = files[0];
+        const reader = new FileReader();
+        reader.addEventListener('load', () => {
+          // console.log(reader.result);
+          // this.setState({ imgSrc: reader.result });
+          this.props.updateImage(reader.result);
+        }, false);
+        reader.readAsDataURL(currentFile);
+      }
+    }
+  }
+
   render() {
+    let dropzoneRef;
     return (
       <div className="form">
         <h1>hCard Builder</h1>
         <h4>PERSONAL DETAILS</h4>
         <hr />
-        <div className="personal n">
+        <div className="personal">
           <InputField
             onChange={this.onInputChange}
             value={this.props.contact.givenName}
@@ -113,10 +158,18 @@ class Form extends Component {
             ref={fileInput => this.fileInput = fileInput}
             className="inputfile" />
           <button
-            onClick={() => this.fileInput.click()}
+            // onClick={() => this.fileInput.click()}
+            onClick={() => { dropzoneRef.open() }}
             className="upload">
             {this.props.image ? 'Change avatar' : 'Upload Avatar'}
           </button>
+          <Dropzone
+            ref={(node) => { dropzoneRef = node; }}
+            style={{ display: 'none' }}
+            onDrop={this.handleOnDrop}
+            accept={acceptedFileTypes}
+            multiple={false}
+            maxSize={imageMaxSize}><i className="fas fa-user fa-8x"></i></Dropzone>
           <button >Create hCard</button>
         </div>
       </div>
@@ -124,4 +177,16 @@ class Form extends Component {
   }
 }
 
-export default Form; 
+export default Form;
+
+
+// let dropzoneRef;
+
+// <div>
+//   <Dropzone ref={(node) => { dropzoneRef = node; }} onDrop={(accepted, rejected) => { alert(accepted) }}>
+//     <p>Drop files here.</p>
+//   </Dropzone>
+//   <button type="button" onClick={() => { dropzoneRef.open() }}>
+//     Open File Dialog
+//   </button>
+// </div>
