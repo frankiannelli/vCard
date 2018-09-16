@@ -1,4 +1,4 @@
-import {imageMaxSize, acceptedFileTypesArray} from '../Constants/constants';
+import {imageMaxSize, acceptedFileTypesArray} from '../../Constants/constants';
 
 const verifyFile = (files) => {
   if (files && files.length > 0) {

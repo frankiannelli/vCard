@@ -3,7 +3,7 @@ import './Preview.css';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import verifyFile from '../../Helpers/verifyFile';
-import { imageMaxSize, acceptedFileTypes } from '../../Constants/constants';
+import { imageMaxSize, acceptedFileTypes } from '../../../Constants/constants';
 
 class Preview extends Component {
 
