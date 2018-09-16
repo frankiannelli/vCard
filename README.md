@@ -39,7 +39,8 @@ this will serve the app on localhost:3000
 * I had never seen the vCard format before so I had to do some learning to understand the requirements.
 * Creating a reponsive app without using a CSS framework such as Bootstrap
 * I dont have a version of photoshop so I would like to get the CSS to match exactly. It was a bit hard to get exact details i used my judgement to get it as close as possible without the exact specifications.
-* Making the app run on IE10
+* Using a really bad internet connection to try to setup a virtual machine to run IE10 (I ran out of free trial on browserling )
 
 ## Further Improvements
 * Get exact details of styling requirements from the designer
+* Get on the NBN so i can download a virtual machine :)
