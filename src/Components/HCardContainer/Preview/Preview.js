@@ -2,10 +2,16 @@ import React, { Component } from 'react';
 import './Preview.css';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
+import Avatar from './Avatar/Avatar';
 import verifyFile from '../../Helpers/verifyFile';
 import { imageMaxSize, acceptedFileTypes } from '../../../Constants/constants';
 
 class Preview extends Component {
+  static propTypes = {
+    contact: PropTypes.object,
+    updateImage: PropTypes.func,
+    imgSrc: PropTypes.string
+  };
 
   handleOnDrop = (files, rejectedFiles) => {
     if (rejectedFiles && rejectedFiles.length > 0) {
@@ -35,14 +41,7 @@ class Preview extends Component {
               <h1 className="fn">{`${this.props.contact.givenName} ${this.props.contact.surname}`}</h1>
             </div>
             {this.props.imgSrc !== null ?
-              <div className="avatarContainer">
-                <div className="imageContainer">
-                  <img
-                    alt="user"
-                    src={this.props.imgSrc}
-                    resizemode='contain' />
-                </div>
-              </div> :
+              <Avatar imgSrc={this.props.imgSrc} /> :
               <Dropzone
                 className="avatarContainer"
                 onDrop={this.handleOnDrop}
@@ -67,7 +66,7 @@ class Preview extends Component {
             </div>
             <hr />
             <div className="previewDetail">
-              <div className="previewLabel" style={{ opacity: '0' }}>text</div>
+              <div className="previewLabel" style={{ opacity: '0' }}>ADDRESS2:</div>
               <div className="previewData"><span className="locality">{`${this.props.contact.suburb}${this.props.contact.suburb ? ',' : ''} `}</span><span className="region">{this.props.contact.state}</span></div>
             </div>
             <hr />
@@ -88,11 +87,5 @@ class Preview extends Component {
     );
   }
 }
-
-Preview.propTypes = {
-  contact: PropTypes.object,
-  updateImage: PropTypes.func,
-  imgSrc: PropTypes.string
-};
 
 export default Preview;
