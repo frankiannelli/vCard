@@ -23,9 +23,7 @@ class Form extends Component {
     const { fieldErrors } = this.props;
     const errMessages = Object.keys(fieldErrors).filter(k => fieldErrors[k]);
 
-    if (!errMessages.length) return true;
-
-    return false;
+    return !errMessages.length;
   }
 
   handleFileSelected = (event) => {

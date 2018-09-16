@@ -46,8 +46,8 @@ class HCardContainer extends Component {
   render() {
     return (
       <div className="wrapper">
-        <div className="container-1">
-          <div className="box-1">
+        <div className="hCardContainer">
+          <div className="formContainer">
             <Form
               contact={this.state.contact}
               image={this.state.selectedFile}
@@ -56,7 +56,7 @@ class HCardContainer extends Component {
               handleImage={this.handleImage}
             />
           </div>
-          <div className="box-2">
+          <div className="previewContainer">
             <Preview
               contact={this.state.contact}
               image={this.state.selectedFile} />
