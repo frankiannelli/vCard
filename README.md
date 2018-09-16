@@ -28,6 +28,7 @@ this will serve the app on localhost:3000
 * Ability to upload Avatar by clicking button or the avatar icon
 * Dynamic update of upload avatar button
 * Immediate feedback of file types and size accepted for the avatar
+* Unit tests with Jest and Enzyme
 
 
 ## Coding Decisions
