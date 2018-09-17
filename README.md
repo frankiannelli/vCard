@@ -5,7 +5,7 @@ Thankyou for the opportunity to submit this challenge. It was very enjoyable.
 ## Challenge Scope
 To create an interactive hCard Builder app with React. User can input data and get immediate validation and preview.
 
-![screenshot](src/Assets/cardPreview.png)
+![screenshot](src/Assets/cardPreview1.png)
 
 ### Getting Running
 
